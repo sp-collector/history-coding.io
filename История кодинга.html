@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История кодинга</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .content {
+            display: flex;
+            margin: 2rem 0;
+            gap: 2rem;
+        }
+        
+        .main-content {
+            flex: 3;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .topic-list {
+            list-style: none;
+        }
+        
+        .topic-list li {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .topic-list a {
+            text-decoration: none;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        .topic-list a:hover {
+            color: var(--secondary);
+        }
+        
+        .topic-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .topic-content {
+            display: none;
+        }
+        
+        .topic-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .topic-image {
+            width: 100%;
+            border-radius: 8px;
+            margin: 1rem 0;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 1.2rem;
+            overflow: hidden;
+        }
+        
+        /* Разные стили для разных типов изображений */
+        .topic-image.portrait img {
+            width: auto;
+            max-width: 100%;
+            height: 400px;
+            object-fit: contain;
+        }
+        
+        .topic-image.landscape img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .topic-image.infographic img {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            background-color: white;
+        }
+        
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .tests-section {
+            margin-top: 3rem;
+        }
+        
+        .test-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .question {
+            margin-bottom: 1.5rem;
+        }
+        
+        .options {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+        
+        .options li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .options label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .options input {
+            margin-right: 10px;
+        }
+        
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .result.correct {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        
+        .result.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--light);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            border: 4px solid var(--secondary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -13px;
+        }
+        
+        .right::after {
+            left: -13px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+            
+            .topic-image.portrait img {
+                height: 300px;
+            }
+            
+            .topic-image.landscape img {
+                height: 200px;
+            }
+            
+            .topic-image.infographic img {
+                height: 250px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>История кодинга</h1>
+            <p class="subtitle">От первых алгоритмов до искусственного интеллекта</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">КодИстория</div>
+            <ul class="nav-links">
+                <li><a onclick="showTopic('home')">Главная</a></li>
+                <li><a onclick="showTopic('timeline')">Хронология</a></li>
+                <li><a onclick="showTopic('tests')">Тесты</a></li>
+                <li><a onclick="showTopic('about')">О проекте</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="content">
+            <div class="main-content">
+                <div id="home" class="topic-content active">
+                    <h2>Добро пожаловать в историю кодинга!</h2>
+                    <p>Этот сайт посвящен увлекательной истории развития программирования и вычислительной техники. Вы узнаете о ключевых личностях, изобретениях и событиях, которые сформировали современный мир технологий.</p>
+                    <p>Используйте меню справа для навигации по темам или перейдите к интерактивным тестам, чтобы проверить свои знания.</p>
+                    <div class="topic-image infographic">
+                        <img src="https://habrastorage.org/getpro/habr/upload_files/c59/29d/0fa/c5929d0fa883ec551efb9d7c2ac5b4e8.png" alt="История развития языков программирования">
+                    </div>
+                    <p class="image-caption">Хронология развития языков программирования</p>
+                </div>
+                
+                <div id="topic1" class="topic-content">
+                    <h2>Ада Лавлейс и Чарльз Бэббидж: первая программа и прообраз компьютера</h2>
+                    <p>В середине XIX века Чарльз Бэббидж разработал концепцию Аналитической машины — механического устройства, которое можно считать прообразом современного компьютера. Ада Лавлейс, дочь поэта лорда Байрона, написала первую в мире программу для этой машины, став первым в истории программистом.</p>
+                    <p>Аналитическая машина Бэббиджа имела все основные компоненты современного компьютера: арифметико-логическое устройство ("мельница"), память ("склад"), устройство ввода и вывода. Хотя машина так и не была построена при жизни изобретателя, её концепция опередила время на целое столетие.</p>
+                    <p>Ада Лавлейс перевела и дополнила комментариями статью итальянского инженера Луиджи Менабреа об аналитической машине. В своих примечаниях она описала алгоритм вычисления чисел Бернулли, который считается первой в истории компьютерной программой.</p>
+                    <div class="topic-image landscape">
+                        <img src="https://stihi.ru/pics/2020/08/15/8551.jpg" alt="Ада Лавлейс и Чарльз Бэббидж">
+                    </div>
+                    <p class="image-caption">Ада Лавлейс и Чарльз Бэббидж - создатели первого алгоритма и прообраза компьютера</p>
+                </div>
+                
+                <div id="topic2" class="topic-content">
+                    <h2>Алан Тьюринг — вычислительные машины против «Энигмы»</h2>
+                    <p>Во время Второй мировой войны Алан Тьюринг сыграл ключевую роль в расшифровке немецких шифров, создав машину для взлома шифровальной машины «Энигма». Его работы заложили основы теории вычислений и искусственного интеллекта.</p>
+                    <p>В 1936 году Тьюринг опубликовал статью "О вычислимых числах", где ввел понятие абстрактной вычислительной машины, позже названной "машиной Тьюринга". Эта концепция стала фундаментальной для компьютерных наук, определив границы того, что может быть вычислено.</p>
+                    <p>Во время войны в Блетчли-Парке Тьюринг разработал электромеханическую машину "Бомба", которая позволяла расшифровывать сообщения, закодированные с помощью "Энигмы". Позже он участвовал в создании более сложного устройства "Колосс" - одного из первых в мире программируемых цифровых компьютеров.</p>
+                    <div class="topic-image portrait">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Alan_Turing_Aged_16.jpg/800px-Alan_Turing_Aged_16.jpg" alt="Алан Тьюринг">
+                    </div>
+                    <p class="image-caption">Алан Тьюринг - отец современной информатики</p>
+                </div>
+                
+                <div id="topic3" class="topic-content">
+                    <h2>Джон фон Нейман — архитектура первых компьютеров</h2>
+                    <p>Джон фон Нейман, венгеро-американский математик, разработал архитектуру компьютеров, которая стала основой для большинства современных вычислительных систем. Архитектура фон Неймана предполагает хранение программ и данных в одной памяти.</p>
+                    <p>В 1945 году фон Нейман опубликовал "Первоначальный отчет о EDVAC", где описал концепцию хранимой программы. Это означало, что компьютерные инструкции могут храниться в памяти так же, как и данные, что делало компьютеры гораздо более гибкими и мощными.</p>
+                    <p>Архитектура фон Неймана включает пять основных компонентов: арифметико-логическое устройство, устройство управления, память, устройства ввода и вывода. Эта структура до сих пор используется в большинстве компьютеров.</p>
+                    <div class="topic-image portrait">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/John_von_Neumann.jpg" alt="Джон фон Нейман">
+                    </div>
+                    <p class="image-caption">Джон фон Нейман - создатель архитектуры современных компьютеров</p>
+                </div>
+                
+                <div id="topic4" class="topic-content">
+                    <h2>Джон Эккерт и Джон Мокли — ENIAC и EDVAC</h2>
+                    <p>Джон Преспер Эккерт и Джон Уильям Мокли были американскими инженерами, создавшими ENIAC (Electronic Numerical Integrator and Computer) - первый электронный цифровой компьютер общего назначения.</p>
+                    <p>ENIAC был огромной машиной, занимавшей целую комнату, весившей 30 тонн и содержавшей около 18 000 электронных ламп. Несмотря на свои размеры, он мог выполнять 5000 операций сложения в секунду, что было невероятно для своего времени.</p>
+                    <p>После ENIAC Эккерт и Мокли разработали EDVAC (Electronic Discrete Variable Automatic Computer), который стал одним из первых компьютеров с хранимой программой, реализующим архитектуру фон Неймана.</p>
+                    <div class="topic-image landscape">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/ENIAC_Penn1.jpg/1280px-ENIAC_Penn1.jpg" alt="ENIAC">
+                    </div>
+                    <p class="image-caption">ENIAC - первый электронный компьютер общего назначения</p>
+                </div>
+                
+                <div id="topic5" class="topic-content">
+                    <h2>Башир Рамеев и Исаак Брук — первая ЭВМ в Советском союзе</h2>
+                    <p>В Советском Союзе развитие вычислительной техники началось в послевоенные годы. Башир Рамеев и Исаак Брук были ключевыми фигурами в создании первых советских электронных вычислительных машин (ЭВМ).</p>
+                    <p>Исаак Брук вместе с Николаем Матюхиным разработал М-1 - первую в СССР малую цифровую электронную вычислительную машину с хранимой программой, которая была запущена в 1951 году.</p>
+                    <p>Башир Рамеев был главным конструктором серии ЭВМ "Урал", которые широко использовались в народном хозяйстве СССР. Он также участвовал в создании Стандарта кодирования символов для советских компьютеров.</p>
+                    <div class="topic-image portrait">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Bashir_Rameev.jpg/800px-Bashir_Rameev.jpg" alt="Башир Рамеев">
+                    </div>
+                    <p class="image-caption">Башир Рамеев - один из создателей первых советских ЭВМ</p>
+                </div>
+                
+                <div id="topic6" class="topic-content">
+                    <h2>Как программирование получило имя — Маргарет Гамильтон и USL</h2>
+                    <p>Термин "software engineering" (программная инженерия) был впервые использован Маргарет Гамильтон, которая руководила разработкой программного обеспечения для космической программы "Аполлон".</p>
+                    <p>Гамильтон и ее команда в MIT разрабатывали бортовое программное обеспечение для Apollo Guidance Computer. Именно в это время программирование начало восприниматься как серьезная инженерная дисциплина, а не просто "кодирование".</p>
+                    <p>Маргарет Гамильтон также основала компанию Higher Order Software, где разработала универсальный системный язык (USL) - один из первых формальных методов разработки программного обеспечения.</p>
+                    <div class="topic-image portrait">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Margaret_Hamilton_1995.jpg/800px-Margaret_Hamilton_1995.jpg" alt="Маргарет Гамильтон">
+                    </div>
+                    <p class="image-caption">Маргарет Гамильтон - создательница термина "программная инженерия"</p>
+                </div>
+                
+                <div id="topic7" class="topic-content">
+                    <h2>Ассемблеры и первые языки высокого уровня</h2>
+                    <p>Первые компьютеры программировались непосредственно в машинных кодах, что было чрезвычайно трудоемким процессом. Появление ассемблеров упростило эту задачу, позволив использовать мнемонические обозначения вместо числовых кодов.</p>
+                    <p>В 1950-х годах начали появляться первые языки высокого уровня. FORTRAN (Formula Translation), разработанный Джоном Бэкусом в IBM, стал первым широко используемым языком высокого уровня, ориентированным на научные вычисления.</p>
+                    <p>COBOL (Common Business-Oriented Language), созданный под руководством Грейс Хоппер, стал стандартом для бизнес-приложений. ALGOL (Algorithmic Language) представил многие концепции, которые позже были унаследованы современными языками программирования.</p>
+                    <div class="topic-image portrait">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Commodore_Grace_M._Hopper%2C_USN_%28covered%29.jpg/800px-Commodore_Grace_M._Hopper%2C_USN_%28covered%29.jpg" alt="Грейс Хоппер">
+                    </div>
+                    <p class="image-caption">Грейс Хоппер - разработчица первого компилятора и языка COBOL</p>
+                </div>
+                
+                <div id="topic8" class="topic-content">
+                    <h2>Алан Шугарт и IBM — распространение дискет</h2>
+                    <p>Алан Шугарт был инженером IBM, который возглавлял команду, разработавшую первую дискету (гибкий магнитный диск) в 1967 году. Первые дискеты имели диаметр 8 дюймов и могли хранить около 80 КБ данных.</p>
+                    <p>В 1976 году Шугарт основал компанию Shugart Associates, которая разработала 5.25-дюймовую дискету, ставшую стандартом для первых персональных компьютеров. Позже Sony представила 3.5-дюймовую дискету с жестким пластиковым корпусом.</p>
+                    <p>Дискеты сыграли ключевую роль в распространении программного обеспечения и обмене данными между компьютерами, оставаясь основным носителем информации до появления CD-ROM и USB-накопителей.</p>
+                    <div class="topic-image portrait">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa6yzI-WxUQBls5ggE1w5TLvL8ptItfoEoig&s" alt="Алан Шугарт">
+                    </div>
+                    <p class="image-caption">Алан Шугарт - изобретатель дискеты</p>
+                </div>
+                
+                <div id="topic9" class="topic-content">
+                    <h2>Микропроцессор и первые персональные компьютеры</h2>
+                    <p>Изобретение микропроцессора в 1971 году компанией Intel (процессор 4004) сделало возможным создание небольших и доступных компьютеров. Микропроцессор объединил все компоненты центрального процессора на одном кристалле.</p>
+                    <p>В 1970-х годах появились первые персональные компьютеры, такие как Altair 8800, Apple I и II, Commodore PET и TRS-80. Эти машины были предназначены для индивидуального использования, а не для больших организаций.</p>
+                    <p>Революцию в области ПК завершило появление IBM PC в 1981 году, который установил стандарты архитектуры, используемые до сих пор. Открытая архитектура IBM PC позволила другим компаниям создавать совместимые компьютеры и периферийные устройства.</p>
+                    <div class="topic-image landscape">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm33r9T7zy6admP4J8Tt51XOp56ueS1HHGAw&s" alt="Первые персональные компьютеры">
+                    </div>
+                    <p class="image-caption">Первые персональные компьютеры: Apple II, IBM PC и другие</p>
+                </div>
+                
+                <div id="topic10" class="topic-content">
+                    <h2>История языков программирования</h2>
+                    <p>Развитие языков программирования прошло через несколько поколений: от машинных кодов и ассемблеров до современных языков высокого уровня с развитыми абстракциями.</p>
+                    <p>В 1970-1980-х годах появились такие влиятельные языки, как C (1972), который стал основой для многих операционных систем; Pascal (1970), способствовавший структурному программированию; и SQL (1974) для работы с базами данных.</p>
+                    <p>С 1990-х годов началась эра объектно-ориентированного программирования с языками C++ (1985), Java (1995) и C# (2000). В XXI веке популярность приобрели скриптовые языки Python, JavaScript и Ruby, а также функциональные языки, такие как Scala и Haskell.</p>
+                    <div class="topic-image portrait">
+                        <img src="https://losst.ru/wp-content/uploads/2016/01/Dennis-Ritchie.jpg" alt="Деннис Ритчи">
+                    </div>
+                    <p class="image-caption">Деннис Ритчи - создатель языка программирования C</p>
+                </div>
+                
+                <div id="topic11" class="topic-content">
+                    <h2>Билл Гейтс</h2>
+                    <p>Билл Гейтс основал Microsoft в 1975 году вместе с Полом Алленом. Их первым крупным успехом стала адаптация языка BASIC для Altair 8800, одного из первых персональных компьютеров.</p>
+                    <p>В 1980 году Microsoft заключила контракт с IBM на разработку операционной системы для IBM PC. Microsoft приобрела права на QDOS (Quick and Dirty Operating System), переименовала ее в MS-DOS и адаптировала для IBM PC.</p>
+                    <p>Гейтс предвидел, что программное обеспечение станет более ценным, чем аппаратное обеспечение. Его стратегия лицензирования MS-DOS для производителей IBM-совместимых компьютеров сделала Microsoft доминирующей компанией в индустрии ПК.</p>
+                    <div class="topic-image portrait">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Bill_Gates_2017_%28cropped%29.jpg/800px-Bill_Gates_2017_%28cropped%29.jpg" alt="Билл Гейтс">
+                    </div>
+                    <p class="image-caption">Билл Гейтс - сооснователь Microsoft</p>
+                </div>
+                
+                <div id="topic12" class="topic-content">
+                    <h2>Стив Джобс</h2>
+                    <p>Стив Джобс и Стив Возняк основали Apple Computer в 1976 году. Их первый продукт, Apple I, был собран вручную в гараже Джобса. Успех пришел с Apple II, который стал одним из первых массовых персональных компьютеров.</p>
+                    <p>В 1984 году Apple представила Macintosh, который популяризировал графический пользовательский интерфейс (GUI) и мышь. Эти технологии, заимствованные из исследовательского центра Xerox PARC, изменили способ взаимодействия людей с компьютерами.</p>
+                    <p>После возвращения в Apple в 1997 году Джобс возродил компанию, представив iMac, iPod, iPhone и iPad. Эти продукты не только изменили соответствующие рынки, но и сформировали современную цифровую эпоху.</p>
+                    <div class="topic-image portrait">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg/800px-Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg" alt="Стив Джобс">
+                    </div>
+                    <p class="image-caption">Стив Джобс - сооснователь Apple</p>
+                </div>
+                
+                <div id="topic13" class="topic-content">
+                    <h2>Развитие нейросетей</h2>
+                    <p>Искусственные нейронные сети, вдохновленные биологическими нейронными сетями мозга, начали развиваться с 1940-х годов. Первая модель искусственного нейрона была предложена Уорреном Маккалоком и Уолтером Питтсом в 1943 году.</p>
+                    <p>В 1958 году Фрэнк Розенблатт создал перцептрон - первую практическую реализацию нейронной сети. Однако ограниченность перцептронов, выявленная Марвином Минским, привела к "зиме искусственного интеллекта" в 1970-х годах.</p>
+                    <p>Возрождение нейросетей началось в 1980-х с разработкой алгоритма обратного распространения ошибки. С 2010-х годов глубокое обучение на основе многослойных нейросетей привело к прорывам в распознавании образов, обработке естественного языка и других областях.</p>
+                    <div class="topic-image portrait">
+                        <img src="https://mpost.io/wp-content/uploads/hinton_4791679.jpeg" alt="Джеффри Хинтон">
+                    </div>
+                    <p class="image-caption">Джеффри Хинтон - один из "отцов" глубокого обучения</p>
+                </div>
+                
+                <div id="tests" class="topic-content">
+                    <div class="tests-section">
+                        <h2>Интерактивные тесты</h2>
+                        
+                        <div class="test-container">
+                            <h3>Тест 1: Первые программисты и компьютеры</h3>
+                            
+                            <div class="question">
+                                <p>1. Кто считается первым программистом в истории?</p>
+                                <ul class="options">
+                                    <li><label><input type="radio" name="q1" value="a"> Алан Тьюринг</label></li>
+                                    <li><label><input type="radio" name="q1" value="b"> Чарльз Бэббидж</label></li>
+                                    <li><label><input type="radio" name="q1" value="c"> Ада Лавлейс</label></li>
+                                    <li><label><input type="radio" name="q1" value="d"> Джон фон Нейман</label></li>
+                                </ul>
+                                <div class="result" id="result1"></div>
+                            </div>
+                            
+                            <div class="question">
+                                <p>2. Какая машина считается прообразом современного компьютера?</p>
+                                <ul class="options">
+                                    <li><label><input type="radio" name="q2" value="a"> ENIAC</label></li>
+                                    <li><label><input type="radio" name="q2" value="b"> Аналитическая машина</label></li>
+                                    <li><label><input type="radio" name="q2" value="c"> Машина Тьюринга</label></li>
+                                    <li><label><input type="radio" name="q2" value="d"> EDVAC</label></li>
+                                </ul>
+                                <div class="result" id="result2"></div>
+                            </div>
+                            
+                            <button onclick="checkTest1()">Проверить ответы</button>
+                        </div>
+                        
+                        <div class="test-container">
+                            <h3>Тест 2: Архитектура компьютеров и языки программирования</h3>
+                            
+                            <div class="question">
+                                <p>1. Кто разработал архитектуру фон Неймана?</p>
+                                <ul class="options">
+                                    <li><label><input type="radio" name="q3" value="a"> Алан Тьюринг</label></li>
+                                    <li><label><input type="radio" name="q3" value="b"> Джон фон Нейман</label></li>
+                                    <li><label><input type="radio" name="q3" value="c"> Джон Мокли</label></li>
+                                    <li><label><input type="radio" name="q3" value="d"> Башир Рамеев</label></li>
+                                </ul>
+                                <div class="result" id="result3"></div>
+                            </div>
+                            
+                            <div class="question">
+                                <p>2. Какой был первый язык программирования высокого уровня?</p>
+                                <ul class="options">
+                                    <li><label><input type="radio" name="q4" value="a"> FORTRAN</label></li>
+                                    <li><label><input type="radio" name="q4" value="b"> COBOL</label></li>
+                                    <li><label><input type="radio" name="q4" value="c"> Ассемблер</label></li>
+                                    <li><label><input type="radio" name="q4" value="d"> BASIC</label></li>
+                                </ul>
+                                <div class="result" id="result4"></div>
+                            </div>
+                            
+                            <button onclick="checkTest2()">Проверить ответы</button>
+                        </div>
+                        
+                        <div class="test-container">
+                            <h3>Тест 3: Персональные компьютеры и современные технологии</h3>
+                            
+                            <div class="question">
+                                <p>1. Кто основал компанию Microsoft?</p>
+                                <ul class="options">
+                                    <li><label><input type="radio" name="q5" value="a"> Стив Джобс и Стив Возняк</label></li>
+                                    <li><label><input type="radio" name="q5" value="b"> Билл Гейтс и Пол Аллен</label></li>
+                                    <li><label><input type="radio" name="q5" value="c"> Алан Шугарт и Джон фон Нейман</label></li>
+                                    <li><label><input type="radio" name="q5" value="d"> Маргарет Гамильтон и Грейс Хоппер</label></li>
+                                </ul>
+                                <div class="result" id="result5"></div>
+                            </div>
+                            
+                            <div class="question">
+                                <p>2. Какое устройство хранения данных было разработано Аланом Шугартом?</p>
+                                <ul class="options">
+                                    <li><label><input type="radio" name="q6" value="a"> Жесткий диск</label></li>
+                                    <li><label><input type="radio" name="q6" value="b"> CD-ROM</label></li>
+                                    <li><label><input type="radio" name="q6" value="c"> Дискета</label></li>
+                                    <li><label><input type="radio" name="q6" value="d"> USB-накопитель</label></li>
+                                </ul>
+                                <div class="result" id="result6"></div>
+                            </div>
+                            
+                            <button onclick="checkTest3()">Проверить ответы</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="timeline" class="topic-content">
+                    <h2>Хронология истории кодинга</h2>
+                    <div class="timeline">
+                        <div class="timeline-item left">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1843</div>
+                                <h3>Ада Лавлейс - первая программа</h3>
+                                <p>Ада Лавлейс публикует первую в мире компьютерную программу для аналитической машины Бэббиджа.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item right">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1936</div>
+                                <h3>Машина Тьюринга</h3>
+                                <p>Алан Тьюринг публикует работу "О вычислимых числах", вводя концепцию машины Тьюринга.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item left">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1945</div>
+                                <h3>Архитектура фон Неймана</h3>
+                                <p>Джон фон Нейман описывает архитектуру компьютера, которая станет основой для большинства современных ЭВМ.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item right">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1946</div>
+                                <h3>ENIAC</h3>
+                                <p>Представлен ENIAC - первый электронный цифровой компьютер общего назначения.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item left">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1951</div>
+                                <h3>Первая советская ЭВМ</h3>
+                                <p>Запущена М-1 - первая советская малая цифровая электронная вычислительная машина.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item right">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1957</div>
+                                <h3>FORTRAN</h3>
+                                <p>Разработан первый язык программирования высокого уровня FORTRAN.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item left">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1967</div>
+                                <h3>Первая дискета</h3>
+                                <p>IBM представляет первую 8-дюймовую дискету.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item right">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1971</div>
+                                <h3>Первый микропроцессор</h3>
+                                <p>Intel выпускает первый микропроцессор 4004.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item left">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1976</div>
+                                <h3>Apple I</h3>
+                                <p>Стив Джобс и Стив Возняк представляют Apple I.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item right">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1981</div>
+                                <h3>IBM PC</h3>
+                                <p>Представлен IBM PC, установивший стандарты для персональных компьютеров.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item left">
+                            <div class="timeline-content">
+                                <div class="timeline-date">1995</div>
+                                <h3>Java и Windows 95</h3>
+                                <p>Представлены язык программирования Java и операционная система Windows 95.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item right">
+                            <div class="timeline-content">
+                                <div class="timeline-date">2007</div>
+                                <h3>iPhone</h3>
+                                <p>Apple представляет iPhone, открывая эру смартфонов.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="about" class="topic-content">
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h2>О проекте</h2>
+                            <p>Этот сайт создан для образовательных целей и посвящен истории развития программирования и вычислительной техники.</p>
+                            <p>Мы стремимся сделать изучение истории кодинга интересным и доступным для всех. На сайте представлена информация о ключевых личностях, изобретениях и событиях, которые сформировали современный мир технологий.</p>
+                            <p>Проект включает в себя:</p>
+                            <ul>
+                                <li>Подробные статьи о ключевых фигурах в истории программирования</li>
+                                <li>Хронологию важнейших событий</li>
+                                <li>Интерактивные тесты для проверки знаний</li>
+                                <li>Богатую коллекцию изображений и иллюстраций</li>
+                            </ul>
+                            <p>Мы надеемся, что этот ресурс поможет вам лучше понять, как развивалась вычислительная техника и программирование на протяжении веков.</p>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://cdn.prod.website-files.com/63fda77e5fd49598bbf00892/68eccf33bc43cdc3ef81c161_68ecc9b4d96b3d41f69a3b85-1760348702356.jpeg" alt="Образовательный проект История кодинга">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <h2>Содержание</h2>
+                <ul class="topic-list">
+                    <li><a onclick="showTopic('home')"><span class="topic-number">🏠</span>Главная</a></li>
+                    <li><a onclick="showTopic('topic1')"><span class="topic-number">1</span>Ада Лавлейс и Чарльз Бэббидж</a></li>
+                    <li><a onclick="showTopic('topic2')"><span class="topic-number">2</span>Алан Тьюринг</a></li>
+                    <li><a onclick="showTopic('topic3')"><span class="topic-number">3</span>Джон фон Нейман</a></li>
+                    <li><a onclick="showTopic('topic4')"><span class="topic-number">4</span>Джон Эккерт и Джон Мокли</a></li>
+                    <li><a onclick="showTopic('topic5')"><span class="topic-number">5</span>Башир Рамеев и Исаак Брук</a></li>
+                    <li><a onclick="showTopic('topic6')"><span class="topic-number">6</span>Маргарет Гамильтон и USL</a></li>
+                    <li><a onclick="showTopic('topic7')"><span class="topic-number">7</span>Ассемблеры и языки высокого уровня</a></li>
+                    <li><a onclick="showTopic('topic8')"><span class="topic-number">8</span>Алан Шугарт и IBM</a></li>
+                    <li><a onclick="showTopic('topic9')"><span class="topic-number">9</span>Микропроцессор и ПК</a></li>
+                    <li><a onclick="showTopic('topic10')"><span class="topic-number">10</span>История языков программирования</a></li>
+                    <li><a onclick="showTopic('topic11')"><span class="topic-number">11</span>Билл Гейтс</a></li>
+                    <li><a onclick="showTopic('topic12')"><span class="topic-number">12</span>Стив Джобс</a></li>
+                    <li><a onclick="showTopic('topic13')"><span class="topic-number">13</span>Развитие нейросетей</a></li>
+                    <li><a onclick="showTopic('timeline')"><span class="topic-number">📅</span>Хронология</a></li>
+                    <li><a onclick="showTopic('tests')"><span class="topic-number">🧪</span>Тесты</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 История кодинга. Все права защищены.</p>
+            <p>Образовательный проект</p>
+        </div>
+    </footer>
+
+    <script>
+        function showTopic(topicId) {
+            // Скрыть все темы
+            const topics = document.querySelectorAll('.topic-content');
+            topics.forEach(topic => {
+                topic.classList.remove('active');
+            });
+            
+            // Показать выбранную тему
+            document.getElementById(topicId).classList.add('active');
+        }
+        
+        function checkTest1() {
+            // Проверка ответов для теста 1
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            
+            const result1 = document.getElementById('result1');
+            const result2 = document.getElementById('result2');
+            
+            // Проверка первого вопроса
+            if (q1 && q1.value === 'c') {
+                result1.textContent = 'Правильно! Ада Лавлейс считается первым программистом.';
+                result1.className = 'result correct';
+            } else {
+                result1.textContent = 'Неправильно. Правильный ответ: Ада Лавлейс.';
+                result1.className = 'result incorrect';
+            }
+            
+            // Проверка второго вопроса
+            if (q2 && q2.value === 'b') {
+                result2.textContent = 'Правильно! Аналитическая машина Бэббиджа считается прообразом компьютера.';
+                result2.className = 'result correct';
+            } else {
+                result2.textContent = 'Неправильно. Правильный ответ: Аналитическая машина.';
+                result2.className = 'result incorrect';
+            }
+        }
+        
+        function checkTest2() {
+            // Проверка ответов для теста 2
+            const q3 = document.querySelector('input[name="q3"]:checked');
+            const q4 = document.querySelector('input[name="q4"]:checked');
+            
+            const result3 = document.getElementById('result3');
+            const result4 = document.getElementById('result4');
+            
+            // Проверка первого вопроса
+            if (q3 && q3.value === 'b') {
+                result3.textContent = 'Правильно! Архитектуру фон Неймана разработал Джон фон Нейман.';
+                result3.className = 'result correct';
+            } else {
+                result3.textContent = 'Неправильно. Правильный ответ: Джон фон Нейман.';
+                result3.className = 'result incorrect';
+            }
+            
+            // Проверка второго вопроса
+            if (q4 && q4.value === 'a') {
+                result4.textContent = 'Правильно! FORTRAN был первым языком программирования высокого уровня.';
+                result4.className = 'result correct';
+            } else {
+                result4.textContent = 'Неправильно. Правильный ответ: FORTRAN.';
+                result4.className = 'result incorrect';
+            }
+        }
+        
+        function checkTest3() {
+            // Проверка ответов для теста 3
+            const q5 = document.querySelector('input[name="q5"]:checked');
+            const q6 = document.querySelector('input[name="q6"]:checked');
+            
+            const result5 = document.getElementById('result5');
+            const result6 = document.getElementById('result6');
+            
+            // Проверка первого вопроса
+            if (q5 && q5.value === 'b') {
+                result5.textContent = 'Правильно! Microsoft была основана Биллом Гейтсом и Полом Алленом.';
+                result5.className = 'result correct';
+            } else {
+                result5.textContent = 'Неправильно. Правильный ответ: Билл Гейтс и Пол Аллен.';
+                result5.className = 'result incorrect';
+            }
+            
+            // Проверка второго вопроса
+            if (q6 && q6.value === 'c') {
+                result6.textContent = 'Правильно! Алан Шугарт разработал первую дискету в IBM.';
+                result6.className = 'result correct';
+            } else {
+                result6.textContent = 'Неправильно. Правильный ответ: Дискета.';
+                result6.className = 'result incorrect';
+            }
+        }
+        
+        // Инициализация - показать главную страницу при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            showTopic('home');
+        });
+    </script>
+</body>
+</html>
